@@ -80,6 +80,7 @@ ul {margin-left:1.2rem;}
   text-align:center;
   margin:2rem 0;
 }
+
 .example img {
   max-width:100%;
   height:auto;
@@ -90,27 +91,71 @@ ul {margin-left:1.2rem;}
   margin: 0 auto 1rem; /* Center image and add space below */
 }
 
-/* Fallback for before-after image */
-.before-after-fallback {
-  width: 100%;
-  height: 300px;
-  background-image: url('images/object-selection-before-after.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+/* Additional styling for the direct image approach */
+.example-direct-image {
+  max-width: 100%;
+  height: auto;
   border: 3px solid #00b0b0;
   border-radius: 8px;
+  margin: 0 auto 1rem;
+  display: block;
+  box-shadow: 0 0 15px rgba(234,55,163,0.1);
+}
+
+/* CSS Drawing Fallback */
+.before-after-demo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border: 3px solid #00b0b0;
+  border-radius: 8px;
+  background-color: #f9ffff;
   margin: 0 auto 1rem;
 }
 
-/* Example iframe styling - NEW ADDITION */
-.example-iframe {
-  width: 100%;
-  height: 300px;
-  border: 3px solid #00b0b0;
-  border-radius: 8px;
-  margin: 0 auto 1rem;
-  background-color: #f9f9f9;
+.demo-panel {
+  flex: 1;
+  position: relative;
+  height: 220px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.demo-title {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #0a8080;
+  font-weight: bold;
+}
+
+.demo-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ea37a3;
+  opacity: 0.5;
+}
+
+.demo-arrow {
+  flex: 0 0 50px;
+  height: 20px;
+  position: relative;
+}
+
+.demo-arrow::after {
+  content: "→";
+  font-size: 2rem;
+  color: #0a8080;
 }
 
 /* Banner caption style */
@@ -361,6 +406,16 @@ footer {
   .other-tools-row {
     grid-template-columns: 1fr;
   }
+  
+  /* Stack the demo on small screens */
+  .before-after-demo {
+    flex-direction: column;
+  }
+  
+  .demo-arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
 }
 </style>
 </head>
@@ -444,16 +499,31 @@ footer {
     </div><!-- End of artist-grid -->
   </div><!-- End of artist-links -->
     
-  <!-- EXAMPLE IMAGE WITH IFRAME APPROACH -->
+  <!-- EXAMPLE IMAGE WITH MULTIPLE APPROACHES -->
   <div class="example">
     <h2>Example — Removing an Unwanted Object</h2>
     
-    <!-- Using iframe to embed the image directly from the repository -->
-    <iframe class="example-iframe" 
-      src="https://hsstokes.github.io/hsstokes-Photoshop-Toolkit-Cutting-Editing-Objects/images/object-selection-before-after.jpg"
-      title="Before and after example of object removal" 
-      sandbox="allow-same-origin">
-    </iframe>
+    <!-- Approach 1: Direct raw GitHub link -->
+    <img src="https://raw.githubusercontent.com/hsstokes/hsstokes-Photoshop-Toolkit-Cutting-Editing-Objects/main/images/object-selection-before-after.jpg" 
+         alt="Before and after example of using the Object Selection Tool" 
+         class="example-direct-image" 
+         onerror="this.style.display='none'; document.getElementById('fallback-demo').style.display='block';">
+    
+    <!-- Approach 2: CSS Fallback (hidden by default) -->
+    <div id="fallback-demo" class="before-after-demo" style="display: none;">
+      <div class="demo-panel">
+        <div class="demo-title">Before</div>
+        <div class="demo-circle"></div>
+        <div style="position:absolute; bottom:10px; left:0; right:0; text-align:center; font-size:0.8rem;">Object to remove</div>
+      </div>
+      
+      <div class="demo-arrow"></div>
+      
+      <div class="demo-panel">
+        <div class="demo-title">After</div>
+        <div style="position:absolute; bottom:10px; left:0; right:0; text-align:center; font-size:0.8rem;">Clean background</div>
+      </div>
+    </div>
     
     <div class="banner-caption">Used Object Selection and Content‑Aware Fill to remove a distraction in seconds.</div>
   </div>
@@ -473,7 +543,7 @@ footer {
 
   <!-- NAVIGATION -->
   <p class="note">
-    ← <a href="https://hsstokes.github.io/photoshop-text-glitch-tutorial/" class="highlight">Back to Creative Text & Glitch Tutorial</a> | 
+    ← <a href="index.html" class="highlight">Back to Creative Text & Glitch Tutorial</a> | 
     Next micro‑lesson coming soon: <em>Layer and Composition Basics</em>
   </p>
 

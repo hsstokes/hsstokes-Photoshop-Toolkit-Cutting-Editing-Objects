@@ -86,6 +86,28 @@ ul {margin-left:1.2rem;}
   border:3px solid #00b0b0;
   border-radius:8px;
   box-shadow:0 0 15px rgba(234,55,163,0.1);
+  display: block; /* Added to ensure proper display */
+  margin: 0 auto 1rem; /* Center image and add space below */
+}
+
+/* Fallback for before-after image */
+.before-after-fallback {
+  width: 100%;
+  height: 300px;
+  background-image: url('images/object-selection-before-after.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 3px solid #00b0b0;
+  border-radius: 8px;
+  margin: 0 auto 1rem;
+}
+
+/* Banner caption style */
+.banner-caption {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
 }
 
 /* ===== TOOL CARDS ===== */
@@ -132,18 +154,20 @@ ul {margin-left:1.2rem;}
   box-shadow: 0 12px 24px rgba(0,176,176,0.2);
 }
 
-/* Enhanced pen-tool-image styling */
+/* Fixed pen-tool-image styling */
 .pen-tool-image {
   object-fit: contain !important;
-  max-height: none !important;
-  width: 100%;
+  max-height: 250px !important; /* FIXED: Limited height */
+  width: auto !important; /* FIXED: Allow width to scale with height */
+  max-width: 100% !important; /* FIXED: Ensure it doesn't overflow */
   height: auto;
-  border: 3px solid #ea37a3 !important; /* Thicker border */
-  box-shadow: 0 4px 12px rgba(234, 55, 163, 0.15) !important; /* Add shadow */
-  margin: 10px 0 20px !important; /* Add more space above and below */
-  background-color: white; /* Ensure clean background */
-  padding: 8px; /* Add inner padding */
+  border: 3px solid #ea37a3 !important;
+  box-shadow: 0 4px 12px rgba(234, 55, 163, 0.15) !important;
+  margin: 10px auto 20px !important; /* Center the image */
+  background-color: white;
+  padding: 8px;
   border-radius: 8px;
+  display: block !important; /* Ensure block display */
 }
 
 /* Bottom row for two items */
@@ -413,7 +437,8 @@ footer {
   <!-- EXAMPLE IMAGE -->
   <div class="example">
     <h2>Example — Removing an Unwanted Object</h2>
-    <img src="images/object-selection-before-after.jpg" alt="Before and after example">
+    <!-- Regular image with fallback div approach -->
+    <div class="before-after-fallback" title="Before and after example showing object removal"></div>
     <div class="banner-caption">Used Object Selection and Content‑Aware Fill to remove a distraction in seconds.</div>
   </div>
 

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cutting & Editing Objects – Photoshop Toolkit</title>
+<style>
+/* ===== GLOBAL STYLING (same as main site) ===== */
+body {
+  margin: 0;
+  font-family: "Andale Mono", "Orator Std", "Courier New", monospace;
+  background-color: white;
+  background-image:
+    linear-gradient(#a0e0e0 1px, transparent 1px),
+    linear-gradient(90deg, #a0e0e0 1px, transparent 1px),
+    linear-gradient(#ffd6ec 2px, transparent 2px),
+    linear-gradient(90deg, #ffd6ec 2px, transparent 2px);
+  background-size:
+    64px 64px,
+    64px 64px,
+    320px 320px,
+    320px 320px;
+  background-attachment: fixed;
+  padding: 3vw;
+  color: #222;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.97);
+  border: 3px double #00b0b0;
+  border-radius: 12px;
+  box-shadow: 0 3px 18px rgba(0,0,0,0.1);
+  padding: 3rem 4rem;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+h1, h2 {font-weight:700; letter-spacing:0.5px;}
+h1 {
+  color:#0a8080;
+  font-size:2rem;
+  border-bottom:3px dotted #ea37a3;
+  padding-bottom:8px;
+}
+h2 {
+  color:#0a8080;
+  font-size:1.4rem;
+  margin-top:2.2rem;
+}
+p, li {line-height:1.6;}
+ul {margin-left:1.2rem;}
+.highlight {color:#ea37a3;}
+.note {
+  border-left:4px solid #ea37a3;
+  background:#fff5fb;
+  padding:0.8rem 1rem;
+  margin-top:1rem;
+  font-size:0.95rem;
+}
+
+/* ===== BOX ===== */
+.box {
+  border:1.5px solid #00b0b0;
+  border-radius:8px;
+  padding:1.2rem 1.5rem;
+  margin-top:1rem;
+  background:#f9ffff;
+  transition:box-shadow 0.4s ease;
+}
+.box:hover {box-shadow:0 0 10px rgba(0,180,200,0.25);}
+
+/* ===== EXAMPLE IMAGE ===== */
+.example {
+  text-align:center;
+  margin:2rem 0;
+}
+.example img {
+  max-width:100%;
+  height:auto;
+  border:3px solid #00b0b0;
+  border-radius:8px;
+  box-shadow:0 0 15px rgba(234,55,163,0.1);
+}
+
+/* ===== TOOL CARDS ===== */
+.artist-links {
+  margin:2.5rem 0 3rem;
+  padding:2rem;
+  border:2px solid #00b0b0;
+  border-radius:10px;
+  background:linear-gradient(135deg,#f9ffff,#fff5fb);
+  box-shadow:0 0 12px rgba(0,176,176,0.1);
+}
+.artist-links h2 {
+  color:#0a8080;
+  font-size:1.4rem;
+  border-bottom:2px dotted #ea37a3;
+  padding-bottom:.4rem;
+  margin-bottom:1.2rem;
+}
+
+/* FIXED GRID: flexible, no overlap */
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: auto;
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+/* each card flows naturally without compression */
+.artist-card {
+  background:#ffffff;
+  border:1.5px solid #00b0b0;
+  border-radius:8px;
+  padding:1rem;
+  text-align:center;
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.artist-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 6px 18px rgba(0,176,176,0.15);
+}
+
+.artist-card img {
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  max-height:180px;
+  object-fit:cover;
+  border-radius:6px;
+  border:2px solid #ea37a3;
+  margin-bottom:0.8rem;
+}
+
+.artist-card h3 {
+  color:#ea37a3;
+  margin:0.4rem 0;
+  font-size:1.05rem;
+}
+
+.artist-card p {
+  font-size:0.9rem;
+  line-height:1.4;
+  color:#333;
+}
+
+/* ===== QUIZ / REFLECTION ===== */
+.quiz-section {
+  margin-top:3rem;
+  padding:2rem;
+  border-radius:12px;
+  background:linear-gradient(135deg,#e5ffff,#fff5fb);
+  border:2px solid #00b0b0;
+  box-shadow:0 0 25px rgba(0,0,0,0.05);
+}
+.quiz-title {
+  text-align:center;
+  color:#0a8080;
+  font-size:1.6rem;
+  border:2px solid #ea37a3;
+  border-radius:10px;
+  background:rgba(234,55,163,0.08);
+  padding:10px;
+  letter-spacing:1px;
+  margin-bottom:20px;
+  animation:titleFade 3s infinite alternate;
+}
+@keyframes titleFade {
+  from {background:rgba(234,55,163,0.08);}
+  to {background:rgba(0,176,176,0.08);}
+}
+
+/* BUTTON STYLE */
+.quiz-btn {
+  font-family:inherit;
+  margin:6px 0;
+  padding:10px 12px;
+  border:2px solid #0a8080;
+  border-radius:6px;
+  background:rgba(10,128,128,0.07);
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+.quiz-btn:hover {
+  background-color:rgba(234,55,163,0.18);
+  transform:translateX(4px);
+}
+
+footer {
+  text-align:center;
+  margin-top:2rem;
+  font-size:0.85rem;
+  color:#555;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .container {
+    padding: 2rem 1.5rem;
+  }
+  .artist-links{padding:1.5rem;}
+  .quiz-section{padding:1.2rem;}
+  .quiz-title{font-size:1.2rem;padding:8px;}
+  .artist-card img{max-height:140px;}
+  .artist-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Photoshop Toolkit — Cutting & Editing Objects</h1>
+
+  <p><strong>Purpose:</strong> Learn how to <em>remove or cut objects cleanly</em> using Photoshop's smart tools: 
+  <strong>Object Selection Tool</strong>, <strong>Remove Tool</strong>, and <strong>Pen Tool</strong>. 
+  These help you refine layouts and prepare visuals for compositional work.</p>
+
+  <div class="note">
+    <p>🧭 <strong>Tip:</strong> Keyboard letters like <strong>W</strong>, <strong>J</strong>, and <strong>P</strong> open a <em>tool group</em>, 
+    not always the specific tool. Hold <strong>Shift + key</strong> to cycle through sub‑tools until the correct one appears.</p>
+  </div>
+
+  <!-- TOOLS SECTION -->
+  <div class="artist-links">
+    <h2>Step 1 — Choose the Right Tool</h2>
+    <div class="artist-grid">
+
+      <div class="artist-card">
+        <img src="images/object-selection-tool.jpg" alt="Object Selection Tool example">
+        <h3>Object Selection Tool (W)</h3>
+        <p>Automatically detects an object's edges — quick and precise for simple shapes.</p>
+        <ul style="text-align:left;font-size:0.9rem;">
+          <li>Select <strong>Object Selection Tool (W)</strong> from the toolbar.</li>
+          <li>Hover to see a blue highlight preview.</li>
+          <li>Click or drag a box around the object.</li>
+          <li>Press <em>Delete</em> to activate Content‑Aware Fill and remove it.</li>
+          <li>Use Shift/Option to add or subtract areas.</li>
+        </ul>
+      </div>
+
+      <div class="artist-card">
+        <img src="images/remove-tool-bar.jpg" alt="Remove Tool example">
+        <h3>Remove Tool (J)</h3>
+        <p>Brush away small distractions; Photoshop intelligently fills the space.</p>
+        <ul style="text-align:left;font-size:0.9rem;">
+          <li>Choose <strong>Remove Tool (J)</strong> from the Contextual Task Bar or use Shift J to cycle.</li>
+          <li>Brush over logos, wires, dust, or objects to erase them.</li>
+          <li>AI Content Aware Fill matches the surrounding area seamlessly.</li>
+        </ul>
+      </div>
+
+      <div class="artist-card">
+        <img src="images/pen-tool-cutout.jpg" alt="Pen Tool example">
+        <h3>Pen Tool (P)</h3>
+        <p>Draw precise paths for complex objects — ideal for fine edges or detailed shapes.</p>
+        <ul style="text-align:left;font-size:0.9rem;">
+          <li>Select <strong>Pen Tool (P)</strong> from the toolbar group.</li>
+          <li>Click around edges to add anchor points (hold drag for curves).</li>
+          <li>Right‑click → <strong>Make Selection</strong> to convert to an editable area.</li>
+          <li>Mask or delete the background for a clean cut‑out.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EXAMPLE IMAGE -->
+  <div class="example">
+    <h2>Example — Removing an Unwanted Object</h2>
+    <img src="images/object-selection-before-after.jpg" alt="Before and after example">
+    <div class="banner-caption">Used Object Selection and Content‑Aware Fill to remove a distraction in seconds.</div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="quiz-section">
+    <h2 class="quiz-title">Quick Reflection</h2>
+    <p>💭 When would each tool work best?</p>
+    <div class="box">
+      <ul>
+        <li><strong>Remove Tool</strong> – for small marks and blemishes</li>
+        <li><strong>Object Selection Tool</strong> – for whole objects on clear backgrounds</li>
+        <li><strong>Pen Tool</strong> – for precise or complex edges</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <p class="note">
+    ← <a href="index.html" class="highlight">Back to Creative Text & Glitch Tutorial</a> | 
+    Next micro‑lesson coming soon: <em>Layer and Composition Basics</em>
+  </p>
+
+  <footer>© 2025 Photoshop Toolkit | Inclusive Micro‑Learning Series.</footer>
+
+</div>
+</body>
+</html>

@@ -123,6 +123,39 @@ ul {margin-left:1.2rem;}
   text-align:center;
   transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
+  /* ADD THIS CODE RIGHT AFTER .artist-card p */
+.video-container {
+  margin-top: 1rem;
+  border-top: 1px dotted #00b0b0;
+  padding-top: 1rem;
+}
+
+.video-container p {
+  margin-bottom: 0.5rem;
+}
+
+.panopto-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  border-radius: 6px;
+  border: 2px solid #ea37a3;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.panopto-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+  
+/* END OF NEW CSS CODE */
 .artist-card:hover {
   transform:translateY(-5px);
   box-shadow:0 6px 18px rgba(0,176,176,0.15);
@@ -265,16 +298,24 @@ footer {
         <h3>Pen Tool (P)</h3>
         <p>Draw precise paths for complex objects — ideal for fine edges or detailed shapes.</p>
         <ul style="text-align:left;font-size:0.9rem;">
-          <li>Select <strong>Pen Tool (P)</strong> from the toolbar group.</li>
-          <li>Click around edges to add anchor points (hold drag for curves).</li>
-          <li>Right‑click → <strong>Make Selection</strong> to convert to an editable area.</li>
-          <li>Mask or delete the background for a clean cut‑out.</li>
+           <li>Select <strong>Pen Tool (P)</strong> from the toolbar group.</li>
+           <li>Click around edges to add anchor points (hold drag for curves).</li>
+           <li>Right‑click → <strong>Make Selection</strong> to convert to an editable area.</li>
+           <li>Mask or delete the background for a clean cut‑out.</li>
         </ul>
-      </div>
-
-    </div>
+        <div class="video-container">
+           <p><strong>Video Tutorial:</strong> Master the Pen Tool (1:32)</p>
+           <div class="panopto-container">
+           <iframe src="https://ual.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=c9211829-49fd-47b4-9411-b21800b2eb28&autoplay=false&offerviewer=true&showtitle=true&showbrand=true&captions=false&interactivity=all" 
+             allowfullscreen allow="autoplay" 
+             aria-label="Panopto Embedded Video Player" 
+             aria-description="Type tool in Photoshop">
+            </iframe>
+           </div>
+        </div>
   </div>
-
+  </div>
+    
   <!-- EXAMPLE IMAGE -->
   <div class="example">
     <h2>Example — Removing an Unwanted Object</h2>

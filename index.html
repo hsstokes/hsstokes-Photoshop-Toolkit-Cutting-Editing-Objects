@@ -391,6 +391,26 @@ footer {
   font-size:0.85rem;
   color:#555;
 }
+/* Hover-zoom effect for demo GIFs */
+.demo-gif {
+  width: 100%;
+  height: auto;
+  border: 2px dotted #ea37a3;
+  border-radius: 6px;
+  margin: 0.5rem 0 0.8rem;
+  display: block;
+  box-shadow: 0 0 12px rgba(234,55,163,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: zoom-in;
+}
+
+/* When hovered, slightly zoom the GIF */
+.demo-gif:hover {
+  transform: scale(1.8);
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 0 25px rgba(234,55,163,0.25);
+}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -416,26 +436,6 @@ footer {
     transform: rotate(90deg);
     margin: 10px 0;
   }
-  /* Hover-zoom effect for demo GIFs */
-.demo-gif {
-  width: 100%;
-  height: auto;
-  border: 2px dotted #ea37a3;
-  border-radius: 6px;
-  margin: 0.5rem 0 0.8rem;
-  display: block;
-  box-shadow: 0 0 12px rgba(234,55,163,0.1);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  cursor: zoom-in;
-}
-
-/* When hovered, slightly zoom the GIF */
-.demo-gif:hover {
-  transform: scale(1.8);
-  z-index: 10;
-  position: relative;
-  box-shadow: 0 0 25px rgba(234,55,163,0.25);
-}
 </style>
 </head>
 <body>
